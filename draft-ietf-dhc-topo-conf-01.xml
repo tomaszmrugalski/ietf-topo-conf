@@ -7,7 +7,7 @@
 <?rfc compact="yes"?> <?rfc subcompact="no"?>
 <?rfc symrefs="yes"?>
 
-<rfc category="bcp" docName="draft-ietf-dhc-topo-conf-00" ipr="trust200902">
+<rfc category="bcp" docName="draft-ietf-dhc-topo-conf-01" ipr="trust200902">
   <front>
     <title abbrev="DHCP Topology Customization">
       Customizing DHCP Configuration on the Basis of Network Topology
@@ -43,7 +43,7 @@
       </address>
     </author>
 
-    <date year="2013" month="February"/>
+    <date year="2014" month="February"/>
 
     <abstract>
       <t>
