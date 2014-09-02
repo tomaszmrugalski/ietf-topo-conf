@@ -7,7 +7,7 @@
 <?rfc compact="yes"?> <?rfc subcompact="no"?>
 <?rfc symrefs="yes"?>
 
-<rfc category="info" docName="draft-ietf-dhc-topo-conf-02" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-dhc-topo-conf-03" ipr="trust200902">
   <front>
     <title abbrev="DHCP Topology Customization">
       Customizing DHCP Configuration on the Basis of Network Topology
@@ -43,7 +43,7 @@
       </address>
     </author>
 
-    <date year="2014" month="July"/>
+    <date year="2014" month="September"/>
 
     <abstract>
       <t>
@@ -296,6 +296,25 @@ RELAY-FORW (sending already relayed message further towards the
 server, when there is more than one relay agent in a chain) and RELAY-REPL
 (when sending back the response towards the client, when there is more than
 one relay agent in a chain).
+      </t>
+
+      <t>
+For completeless, we also mention an uncommon, but valid case, where
+relay agents set link-address field in relayed RELAY-FORW
+messages. This may happen if the relay agent doesn't have any address
+with a larger scope. Even though link local addresses can't be
+automatically used to associate relay agent with a given link, with
+sufficient information provided the server is still able to correctly
+select proper link. That requires the DHCP server software to be able
+to specify relay agent link-address or a feature similar to 'shared
+subnets' (see <xref target="shared-subnets" />). Network administrator
+has to manually configure additional information that a given subnet
+uses a relay agent with link-address X. Alternatively, if the relay
+agent uses link address X and relays messages from a subnet A, an
+administrator can configure that subnet A is a shared subnet with a
+very small X/128 subnet. That is not a recommended configuration, but
+in cases where it is impossible for relay agents to get an address
+from the subnet they are relaying from, it may be a viable solution.
       </t>
 
       <t>
@@ -632,7 +651,7 @@ this won't be an issue in new deployments.
       </t>
     </section>
 
-    <section title="Multiple subnets on the same link">
+    <section anchor="shared-subnets" title="Multiple subnets on the same link">
       <t>There are scenarios where there is more than one subnet from the same
       protocol family (i.e. two or more IPv4 subnets or two or more IPv6
       subnets) configured on the same layer 3 link.  One example is a slow
@@ -685,10 +704,13 @@ relation to this document.
     </section>
   </middle>
   <back>
-    <references title="Informative References">
-      <?rfc include="reference.RFC.1034" ?>
+    <references title="Normative References">
       <?rfc include="reference.RFC.2131" ?>
       <?rfc include="reference.RFC.3315" ?>
+    </references>
+
+    <references title="Informative References">
+      <?rfc include="reference.RFC.1034" ?>
       <?rfc include="reference.RFC.6221" ?>
       <?rfc include="reference.RFC.6977" ?>
     </references>
