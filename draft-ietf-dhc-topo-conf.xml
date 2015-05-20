@@ -323,7 +323,7 @@ and are discussed in sections <xref target="v4-behavior"/> and
     <t>In DHCPv6 unicast communication is possible in case where the
     server is configured with a Server Unicast option (see Section
     22.12 in <xref target="RFC3315" />) and clients are able to take
-    advantage of it. In such case once the clients get their
+    advantage of it. In such cases, once the clients get their
     (presumably global) addresses, they are able to contact server
     directly, bypassing relays. It should be noted that such a mode is
     completely controllable by administrators in DHCPv6.  (They may
@@ -354,7 +354,7 @@ and are discussed in sections <xref target="v4-behavior"/> and
     <xref target="RFC3315"/>) that identifies the link clients are
     connected to. If the interface-id is unique within an
     administrative domain, the interface-id value may be used to
-    select appropriate subnet. As there is no guarantee for the
+    select the appropriate subnet. As there is no guarantee for the
     uniqueness (<xref target="RFC3315"/> only mandates the
     interface-id to be unique within a single relay agent context), it
     is up to the administrator to check whether the relay agents
