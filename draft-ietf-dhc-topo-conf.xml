@@ -574,7 +574,8 @@ receive a routers option containing the IP address 192.0.2.129.
     <section title="Regional Configuration Example">
 
       <t>
-In <xref target="complex-network"/> example, link C is a regional backbone for an ISP.  Link E is
+In the <xref target="complex-network"/> example, link C is a regional
+backbone for an ISP.  Link E is
 also a regional backbone for that ISP.  Relays A, B, C and D are PE
 routers, and Links A, B, F and G are actually link aggregators with
 individual layer 2 circuits to each customer&mdash;for example, the
