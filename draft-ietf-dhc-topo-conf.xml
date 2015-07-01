@@ -278,25 +278,26 @@ and are discussed in sections <xref target="v4-behavior"/> and
       sections.</t>
 
       <t>Finally, clients may be connected to the same link as the
-      server, so no relay agents are required. In such case, the
+      server, so no relay agents are required. In such cases, the
       DHCPv4 server typically uses the IPv4 address assigned to the
-      network interfae over which the transmission was received, to
+      network interface over which the transmission was received to
       select appropriate subnet. This is more complicated for DHCPv6,
       as the DHCPv6 server is not required to have any globally unique
-      address. In such cases, an additional configuration information
-      is required. Some servers allow indicating that a given subnet
+      addresses. In such cases, an additional configuration information
+      may be required. Some servers allow indicating that a given subnet
       is directly reachable over specific local network interface.</t>
 
   <section anchor="v4-behavior" title="DHCPv4 Specific Behavior">
     
     <t>In some cases in DHCPv4, when a DHCPv4 client has a routable
     IPv4 address, the message is unicast to the DHCPv4 server rather
-    than going through a relay agent.</t>
+    than going through a relay agent. Examples of such transmissions
+    are renewal (DHCPREQUEST) and address release (DHCPRELEASE).</t>
 
     <t>The relay agent that receives client's message sets GIADDR
-    field to the adress of the network interface the message was
-    received on. The relay agent may insert additional options as
-    well.</t>
+    field to the address of the network interface the message was
+    received on. The relay agent may insert a relay agent option
+    <xref target="RFC3046"/>.</t>
 
     <t>There are several options defined that are useful for subnet
     selection in DHCPv4. <xref target="RFC3527" /> defines Link
@@ -323,9 +324,9 @@ and are discussed in sections <xref target="v4-behavior"/> and
     <t>In DHCPv6 unicast communication is possible in case where the
     server is configured with a Server Unicast option (see Section
     22.12 in <xref target="RFC3315" />) and clients are able to take
-    advantage of it. In such cases, once the clients get their
-    (presumably global) addresses, they are able to contact server
-    directly, bypassing relays. It should be noted that such a mode is
+    advantage of it. In such cases, once a client is assigned a,
+    presumably global, address, it is able to contact the server
+    directly, bypassing any relays. It should be noted that such a mode is
     completely controllable by administrators in DHCPv6.  (They may
     simply choose to not configure server unicast option, thus forcing
     clients to send their messages always via relay agents in every
@@ -785,6 +786,7 @@ relation to this document.
     <references title="Informative References">
       <?rfc include="reference.RFC.1034" ?>
       <?rfc include="reference.RFC.3011" ?>
+      <?rfc include="reference.RFC.3046" ?>
       <?rfc include="reference.RFC.3527" ?>
       <?rfc include="reference.RFC.4193" ?>
       <?rfc include="reference.RFC.6221" ?>
