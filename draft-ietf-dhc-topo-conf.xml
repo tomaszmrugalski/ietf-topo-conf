@@ -7,7 +7,7 @@
 <?rfc compact="yes"?> <?rfc subcompact="no"?>
 <?rfc symrefs="yes"?>
 
-<rfc category="info" docName="draft-ietf-dhc-topo-conf-05" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-dhc-topo-conf-06" ipr="trust200902">
   <front>
     <title abbrev="DHCP Topology Customization">
       Customizing DHCP Configuration on the Basis of Network Topology
@@ -93,16 +93,21 @@ most modern DHCP servers.
     <section title="Terminology">
       <t>
         <list style="symbols">
-          <t>Routable IP address: an IP address with a scope of use wider
-          than the local link.</t>
-
-          <t>PE router: provider edge router. The provider router closest
-          to the customer.</t>
-
-          <t>CPE device: customer premise equipment device.  Typically a
+          <t>CPE device: Customer Premise Equipment device.  Typically a
           router belonging to the customer that connects directly to the
           provider link.</t>
+          
+          <t>DHCP, DHCPv4, and DHCPv6. DHCP refers to the Dynamic Host
+          Configuration Protocol in general (DHCPv4 and DHCPv6). The
+          terms DHCPv4 and DHCPv6 are used in contexts where it is
+          necessary to avoid ambiguity and explain differences.</t>
+          
+          <t>PE router: Provider Edge router. The provider router closest
+          to the customer.</t>
 
+          <t>Routable IP address: an IP address with a scope of use wider
+          than the local link.</t>
+          
           <t>Shared subnet: a case where two or more subnets of the
           same protocol family are available on the same link. 'Shared
           subnet' terminology is typically used in Unix
@@ -123,11 +128,11 @@ most modern DHCP servers.
 
       <t>
         <xref target="complex-network"/> illustrates a more complex case.
-        Although some of its aspects are unlikely to be seen in an actual
+        Although some of its aspects are unlikely to be seen in actual
         production networks, they are beneficial for explaining finer
         aspects of the DHCP protocols. Note that some nodes act as routers
         (which forward all IPv6 traffic) and some are relay agents (i.e. run
-        DHCPv6 specific software that forwards only DHCPv6 traffic).
+        DHCP specific software that forwards only DHCP traffic).
       </t>
 
       <figure anchor="simple-network"
@@ -251,7 +256,7 @@ IP configuration, it generally communicates with the DHCP server by
 sending its requests to a DHCP relay agent on the local link; this
 relay agent, which has a routable IP address, then forwards the DHCP
 requests to the DHCP server (directly or via other relays). In later
-stages of the configuration when the client has aquired an address
+stages of the configuration when the client has acquired an address
 and certain conditions are met, it is possible for the client to
 send packets directly to the server, thus bypassing the relays.
 The conditions for such behavior are different for DHCPv4 and DHCPv6
@@ -269,10 +274,10 @@ and are discussed in sections <xref target="v4-behavior"/> and
       </t>
 
       <t>Sometimes it is useful for the relay agents to provide additional
-      about the topology. A number of extensions have been defined for
+      information about the topology. A number of extensions have been defined for
       this purpose. The specifics are different, but the core principle
       remains the same: the relay agent knows exactly where the original
-      request came from, so it provides an indentifier that will help
+      request came from, so it provides an identifier that will help
       the server to choose appropriate address pool and configuration
       parameters. Examples of such options are mentioned in the following
       sections.</t>
@@ -281,11 +286,11 @@ and are discussed in sections <xref target="v4-behavior"/> and
       server, so no relay agents are required. In such cases, the
       DHCPv4 server typically uses the IPv4 address assigned to the
       network interface over which the transmission was received to
-      select appropriate subnet. This is more complicated for DHCPv6,
+      select an appropriate subnet. This is more complicated for DHCPv6,
       as the DHCPv6 server is not required to have any globally unique
-      addresses. In such cases, an additional configuration information
-      may be required. Some servers allow indicating that a given subnet
-      is directly reachable over specific local network interface.</t>
+      addresses. In such cases, additional configuration information
+      may need to be required. Some servers allow indicating that a given subnet
+      is directly reachable over a specific local network interface.</t>
 
   <section anchor="v4-behavior" title="DHCPv4 Specific Behavior">
     
@@ -300,19 +305,19 @@ and are discussed in sections <xref target="v4-behavior"/> and
     <xref target="RFC3046"/>.</t>
 
     <t>There are several options defined that are useful for subnet
-    selection in DHCPv4. <xref target="RFC3527" /> defines Link
-    Selection sub-option that is iserted by a relay agent. This option
+    selection in DHCPv4. <xref target="RFC3527" /> defines the Link
+    Selection sub-option that is inserted by a relay agent. This option
     is particularly useful when the relay agent needs to specify the
     subnet/link on which a DHCP client resides, which is different
     from an IP address that can be used to communicate with the relay
-    agent. Virtual Subnet Selection Option, specified in <xref
-    target="RFC6607" /> is used for the same purpose (i.e. relay
-    agents insert that information), but it also covers additional use
-    cases in VPN environment. In certain cases it is useful for the
-    client itself to specify this option, e.g. when there are no
-    relay agents involved during VPN set up process.</t>
+    agent. The Virtual Subnet Selection sub-option, specified in <xref
+    target="RFC6607" />, can also be added by a relay agent to specify
+    information in a VPN environment. In certain cases, it is useful
+    for the client itself to specify the Virtual Subnet Selection option,
+    e.g. when there are no relay agents involved during the VPN set up
+    process.</t>
 
-    <t>Another option that may influence the subnet selection is
+    <t>Another option that may influence the subnet selection is the
     IPv4 Subnet Selection Option, defined in <xref target="RFC3011"/>,
     which allows the client to explicitly request allocation from
     a given subnet.</t>
@@ -333,8 +338,8 @@ and are discussed in sections <xref target="v4-behavior"/> and
     case).</t>
 
     <t>In the DHCPv6 protocol, there are two core mechanisms defined
-    in <xref target="RFC3315"/> that allow server to distinguish which
-    link the relay agent is connected to.  The first mechanism is a
+    in <xref target="RFC3315"/> that allow a server to distinguish which
+    link the relay agent is connected to.  The first mechanism is the
     link-address field in the Relay-forward and Relay-reply
     messages. Somewhat contrary to its name, relay agents insert in
     the link-address field an address that is typically global and can
@@ -342,7 +347,7 @@ and are discussed in sections <xref target="v4-behavior"/> and
     located. In normal circumstances this is the solution that is
     easiest to maintain, as existing address assignments can be used
     and no additional administrative actions (like assigning dedicated
-    identifers for each relay agent, making sure they are unique and
+    identifiers for each relay agent, making sure they are unique and
     maintaining a list of such identifiers) are needed. It requires,
     however, for the relay agent to have an address with a scope
     larger than link-local configured on its client-facing
@@ -359,8 +364,9 @@ and are discussed in sections <xref target="v4-behavior"/> and
     uniqueness (<xref target="RFC3315"/> only mandates the
     interface-id to be unique within a single relay agent context), it
     is up to the administrator to check whether the relay agents
-    deployed use unique interface-id values. If they aren't, Interface-id
-    cannot be used to determine client's point of attachment.</t>
+    deployed use unique interface-id values. If the interface-id values
+    are not unique, the Interface-id option can not be used to determine
+    a client's point of attachment.</t>
 
     <t>It should be noted that Relay-forward and Relay-reply
     messages are exchanged between relays and servers only. Clients
@@ -372,12 +378,12 @@ and are discussed in sections <xref target="v4-behavior"/> and
     when there is more than one relay agent in a chain).</t>
 
     <t>For completeness, we also mention an uncommon, but valid case,
-    where relay agents set link-local address in the link-address
+    where relay agents use a link-local address in the link-address
     field in relayed Relay-forward messages. This may happen if the
     relay agent doesn't have any address with a larger scope. Even
-    though link local addresses cannot be automatically used to
-    associate relay agent with a given link, with sufficient
-    information provided the server is still able to correctly select
+    though link-local addresses cannot be automatically used to
+    associate relay agent with a given link, with additional
+    configuration information the server may still able to select
     the proper link. That requires the DHCP server software to be able to
     specify relay agent link-address or a feature similar to 'shared
     subnets' (see <xref target="shared-subnets" />). Network
@@ -409,7 +415,7 @@ and are discussed in sections <xref target="v4-behavior"/> and
     Option defined in Section 5 of <xref target="RFC6977" />).  It
     should be noted that there the link-specific identifier is unique
     only within the scope of the link-identifying IP address. For example,
-    link-specific indentifier of "eth0" for a relay agent with IPv4 address
+    link-specific identifier of "eth0" for a relay agent with IPv4 address
     192.0.2.1 means something different than "eth0" for a relay agent
     with address 192.0.2.123.</t>
 
@@ -460,7 +466,7 @@ configuration. Although we know of no DHCP server that uses this
 specific syntax, most modern DHCP server provides similar functionality.
       </t>
 
-      <figure anchor="fig-config-example1" title="Configuration example">
+      <figure anchor="fig-config-example1" title="Configuration Example">
         <artwork><![CDATA[
 {
     "prefixes": {
@@ -521,8 +527,8 @@ receive a routers option containing the IP address 192.0.2.129.
       </t>
     </section>
 
-    <section title="Relay agent running on a host">
-      <t>A relay agent is a DHCP software that may be run on any IP
+    <section title="Relay Agent Running on a Host">
+      <t>A relay agent is DHCP software that may be run on any IP
       node. Although it is typically run on a router, this is by no
       means required by the DHCP protocol.  The relay agent is simply
       a service that operates on a link, receiving link-local
@@ -540,7 +546,7 @@ receive a routers option containing the IP address 192.0.2.129.
       but a valid configuration.</t>
     </section>
 
-    <section title="Cascade relays">
+    <section title="Cascaded Relays">
       <t>Let's observe another case, shown in <xref target="complex-network"/>.
       Note that in this configuration, the clients connected to link G will
       send their requests to relay D which will forward its packets directly
@@ -601,7 +607,7 @@ goal is to configure all the devices within a region with server
 addresses local to that region, so that service traffic does not have
 to be routed between regions unnecessarily.
       </t>
-      <figure anchor="example-regions" title="An example regions configuration">
+      <figure anchor="example-regions" title="Regional Configuration Example">
         <artwork><![CDATA[
 {
     "prefixes": {
@@ -711,9 +717,9 @@ accomplished with most existing modern DHCP servers.
     names, the changes made in the DNS zone may not be visible to the
     server until the DNS cache expires.  In general, it is the
     responsibility of the DNS zone's administrator to ensure that
-    existing cache does not cause a trouble when a change is made to
+    cached data does not cause trouble when a change is made to
     the zone; it should be usually reasonable for the DHCP server to
-    rely on it.  However, if this is not desired or if the management
+    rely on cached data.  However, if this is not desired or if the management
     of the DNS zone is not very reliable, the DHCP server can be
     configured to query the authoritative DNS server directly,
     bypassing any caching DNS servers.</t>
@@ -721,7 +727,7 @@ accomplished with most existing modern DHCP servers.
     <t>It is worth noting that DNS is not the only way to resolve names, and
     not all DHCP servers support other techniques (e.g., NIS+ or WINS).
     However, since these protocols have all but vanished from common use,
-    this won't be an issue in new deployments.</t>
+    this should not be an issue in new deployments.</t>
   </section>
 
     <section anchor="shared-subnets" title="Multiple subnets on the same link">
