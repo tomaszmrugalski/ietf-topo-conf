@@ -98,9 +98,10 @@ most modern DHCP servers.
           provider link.</t>
           
           <t>DHCP, DHCPv4, and DHCPv6. DHCP refers to the Dynamic Host
-          Configuration Protocol in general (DHCPv4 and DHCPv6). The
-          terms DHCPv4 and DHCPv6 are used in contexts where it is
-          necessary to avoid ambiguity and explain differences.</t>
+          Configuration Protocol in general and applies to both DHCPv4
+          and DHCPv6. The terms DHCPv4 and DHCPv6 are used in contexts
+          where it is necessary to avoid ambiguity and explain
+          differences.</t>
           
           <t>PE router: Provider Edge router. The provider router closest
           to the customer.</t>
@@ -131,7 +132,7 @@ most modern DHCP servers.
         Although some of its aspects are unlikely to be seen in actual
         production networks, they are beneficial for explaining finer
         aspects of the DHCP protocols. Note that some nodes act as routers
-        (which forward all IPv6 traffic) and some are relay agents (i.e. run
+        (which forward all IP traffic) and some are relay agents (i.e. run
         DHCP specific software that forwards only DHCP traffic).
       </t>
 
@@ -263,14 +264,13 @@ The conditions for such behavior are different for DHCPv4 and DHCPv6
 and are discussed in sections <xref target="v4-behavior"/> and
 <xref target="v6-behavior"/>.</t>
 
-      <t>The DHCP server uses an IP address from the client's message
-      which is on the same link as the client to perform address
-      assignment decisions or to select subnet-specific configuration
-      for the client. The address that the server uses is the DHCP
-      client's routable IP address or the client facing address of the
-      relay agent. The server is then able to determine the client's
-      point of attachment and select appropriate subnet- or
-      link-specific configuration.
+      <t>To determine the client's point of attachment and link specific
+      configuration, the server typically uses the client facing IP address of
+      the relay agent. In some cases the server may use the routable IP address
+      of the client, if the client has the routable IP address assigned to its
+      interface and it is transmitted in the DHCP message.  The server is then
+      able to determine the client's point of attachment and select appropriate
+      subnet- or link-specific configuration.
       </t>
 
       <t>Sometimes it is useful for the relay agents to provide additional
@@ -299,7 +299,7 @@ and are discussed in sections <xref target="v4-behavior"/> and
     than going through a relay agent. Examples of such transmissions
     are renewal (DHCPREQUEST) and address release (DHCPRELEASE).</t>
 
-    <t>The relay agent that receives client's message sets GIADDR
+    <t>The relay agent that receives client's message sets giaddr
     field to the address of the network interface the message was
     received on. The relay agent may insert a relay agent option
     <xref target="RFC3046"/>.</t>
@@ -308,7 +308,7 @@ and are discussed in sections <xref target="v4-behavior"/> and
     selection in DHCPv4. <xref target="RFC3527" /> defines the Link
     Selection sub-option that is inserted by a relay agent. This option
     is particularly useful when the relay agent needs to specify the
-    subnet/link on which a DHCP client resides, which is different
+    subnet/link on which a DHCPv4 client resides, which is different
     from an IP address that can be used to communicate with the relay
     agent. The Virtual Subnet Selection sub-option, specified in <xref
     target="RFC6607" />, can also be added by a relay agent to specify
@@ -353,12 +353,14 @@ and are discussed in sections <xref target="v4-behavior"/> and
     larger than link-local configured on its client-facing
     interface.</t>
 
-    <t>If for whatever reason that is not feasible (e.g. because the
-    relay agent does not have a global address or ULA <xref
-    target="RFC4193"/> configured on the client-facing interface), the
-    relay agent includes an Interface-Id option (see Section 22.18 of
-    <xref target="RFC3315"/>) that identifies the link clients are
-    connected to. If the interface-id is unique within an
+    <t>The second mechanism uses Interface-Id option (see Section
+    22.18 of <xref target="RFC3315" />) inserted by the relay agent,
+    which identifies the link that the client is connected to.
+    This mechanism may be used for example, when the relay agent
+    does not have a globally unique address or ULA <xref
+    target="RFC4193"/> configured on the client-facing interface) on
+    the client facing interface, thus making the first mechanism
+    not feasible. If the interface-id is unique within an
     administrative domain, the interface-id value may be used to
     select the appropriate subnet. As there is no guarantee for the
     uniqueness (<xref target="RFC3315"/> only mandates the
@@ -366,7 +368,7 @@ and are discussed in sections <xref target="v4-behavior"/> and
     is up to the administrator to check whether the relay agents
     deployed use unique interface-id values. If the interface-id values
     are not unique, the Interface-id option can not be used to determine
-    a client's point of attachment.</t>
+    the client's point of attachment.</t>
 
     <t>It should be noted that Relay-forward and Relay-reply
     messages are exchanged between relays and servers only. Clients
@@ -380,13 +382,16 @@ and are discussed in sections <xref target="v4-behavior"/> and
     <t>For completeness, we also mention an uncommon, but valid case,
     where relay agents use a link-local address in the link-address
     field in relayed Relay-forward messages. This may happen if the
-    relay agent doesn't have any address with a larger scope. Even
+    relay agent doesn't have any address with a larger scope on the
+    interface connected to that specific link. Even
     though link-local addresses cannot be automatically used to
     associate relay agent with a given link, with additional
     configuration information the server may still able to select
     the proper link. That requires the DHCP server software to be able to
-    specify relay agent link-address or a feature similar to 'shared
-    subnets' (see <xref target="shared-subnets" />). Network
+    specify relay agent link-address associated with each link or
+    a feature similar to 'shared
+    subnets' (see <xref target="shared-subnets" />). Both may or may
+    not be supported by the server software. Network
     administrator has to manually configure additional information
     that a given subnet uses a relay agent with link-address
     X. Alternatively, if the relay agent uses link address X and
@@ -409,15 +414,15 @@ and are discussed in sections <xref target="v4-behavior"/> and
     cases which layer 2 link the client is connected to, when the
     layer 3 link is aggregated out of multiple layer 2 links.</t>
 
-    <t>In all cases, then, the DHCP server will have a
+    <t>In all cases, then, the DHCPv6 server will have a
     link-identifying IP address, and in some cases it may also have a
     link-specific identifier (e.g. Interface-Id Option or Link Address
     Option defined in Section 5 of <xref target="RFC6977" />).  It
     should be noted that there the link-specific identifier is unique
     only within the scope of the link-identifying IP address. For example,
     link-specific identifier of "eth0" for a relay agent with IPv4 address
-    192.0.2.1 means something different than "eth0" for a relay agent
-    with address 192.0.2.123.</t>
+    2001:db8::1 means something different than "eth0" for a relay agent
+    with address 2001:db8::2.</t>
 
     <t>It is also possible for link-specific identifiers to be nested,
     so that the actual identifier that identifies the link is an
@@ -426,7 +431,7 @@ and are discussed in sections <xref target="v4-behavior"/> and
     single identifier were received from a single LDRA, so we do not
     treat it specially in the discussion below, but sites that use
     chained LDRA configurations will need to be aware of this when
-    configuring their DHCP servers.</t>
+    configuring their DHCPv6 servers.</t>
 
     <t>The Virtual Subnet Selection Options, present in DHCPv4, are also
     defined for DHCPv6. The use case is the same as in DHCPv4: the relay
@@ -556,11 +561,11 @@ receive a routers option containing the IP address 192.0.2.129.
       is sometimes referred to as cascade relay agents.</t>
 
       <t>Note that the relaying mechanism works differently in DHCPv4 and in
-      DHCPv6. In DHCPv4 only the first relay is able to set the GIADDR field in
+      DHCPv6. In DHCPv4 only the first relay is able to set the giaddr field in
       the DHCPv4 packet. Any following relays that receive that packet will not
-      change it as the server needs GIADDR information from the first relay
+      change it as the server needs giaddr information from the first relay
       (i.e. the closest to the client). The server will send the response back to
-      the GIADDR address, which is the address of the first relay agent that
+      the giaddr address, which is the address of the first relay agent that
       saw the client's message. That means that the client messages travel on a
       different path than the server's responses. A message from client connected
       to link G will travel via relay D, relay E and to the server. A response
@@ -611,16 +616,16 @@ to be routed between regions unnecessarily.
         <artwork><![CDATA[
 {
     "prefixes": {
-        "2001:db8:0:0::/40": {
+        "2001:db8::/40": {
             "on-link": ["A"]
         },
-        "2001:db8:100:0::/40": {
+        "2001:db8:100::/40": {
             "on-link": ["B"]
         },
-        "2001:db8:200:0::/40": {
+        "2001:db8:200::/40": {
             "on-link": ["F"]
         },
-        "2001:db8:300:0::/40": {
+        "2001:db8:300::/40": {
             "on-link": ["G"]
         }
     },
@@ -652,10 +657,10 @@ to be routed between regions unnecessarily.
 
       <t>
 In this example, when a request comes in to the DHCP server with a
-link-identifying IP address in the 2001:DB8:0:0::/40 prefix, it is
-identified as being on link A.  The DHCP server then looks on the list
+link-identifying IP address in the 2001:DB8::/40 prefix, it is
+identified as being on link A.  The DHCPv6 server then looks on the list
 of links to see what region the client is in.  Link A is identified as
-being in omashu.  The DHCP server then looks up omashu in the set of
+being in omashu.  The DHCPv6 server then looks up omashu in the set of
 regions, and discovers a list of region-specific options.
       </t>
 
@@ -667,81 +672,53 @@ containing the IP addresses returned by the resolver for
 dns1.omashu.example.org and dns2.omashu.example.org. Depending on the
 server capability and configuration, it may cache resolved responses
 for specific period of time, repeat queries every time or even keep
-the response until reconfiguration or shutdown.
-      </t>
+the response until reconfiguration or shutdown. For more detailed
+discussion see Section 7 of <xref target="RFC7227" />.</t>
 
       <t>
 Similarly, if the DHCP server receives a request from a DHCP client
 where the link-identifying IP address is contained by the prefix
-2001:DB8:300:0::/40, then the DHCP server identifies the client as
+2001:DB8:300::/40, then the DHCP server identifies the client as
 being connected to link G.  The DHCP server then identifies link G as
 being in the gaoling region, and returns the sip-servers and
 dns-servers options specific to that region.
       </t>
 
-      <t>
-As with the previous example, the exact configuration syntax and
-structure shown above does not precisely match what existing DHCP
-servers do, but the behavior illustrated in this example can be
-accomplished with most existing modern DHCP servers.
-      </t>
+      <t>As with the previous example, the exact configuration syntax and
+      structure shown above does not precisely match what existing DHCP servers
+      do, but the behavior illustrated in this example can be accomplished with
+      most existing modern DHCP servers.</t>
     </section>
-
-  <section title="Dynamic Lookup">
-
-    <t>In the Regional example, the configuration listed several domain
-    names as values for the sip-servers and dns-servers options.  The
-    wire format of both of these options contains one or more IPv6
-    addresses&mdash;there is no way to return a domain name to the
-    client.</t>
-
-    <t>This was understood to be an issue when the original DHCP protocol
-    was defined, and historical implementations even from the very early
-    days would accept domain names and resolve them.  Some early DHCP
-    implementations, particularly those based on earlier BOOTP
-    implementations, had very limited capacity for reconfiguration.</t>
-
-    <t>However, most modern DHCP servers handle name resolution by
-    querying the resolver each time a DHCP packet comes in.  This means
-    that if DHCP servers and DNS servers are managed by different
-    administrative entities, there is no need for the administrators of
-    the DHCP servers and DNS servers to communicate when changes are
-    made.  When changes are made to the DNS server, these changes are
-    promptly and automatically adopted by the DHCP server, as long as the
-    DNS server is managed appropriately (see the next paragraph).
-    Similarly, when DHCP server configurations change, DNS server
-    administrators need not be aware of this.</t>
-
-    <t>It should be noted that even though the DHCP server may be
-    configured to query the DNS resolver every time it uses configured
-    names, the changes made in the DNS zone may not be visible to the
-    server until the DNS cache expires.  In general, it is the
-    responsibility of the DNS zone's administrator to ensure that
-    cached data does not cause trouble when a change is made to
-    the zone; it should be usually reasonable for the DHCP server to
-    rely on cached data.  However, if this is not desired or if the management
-    of the DNS zone is not very reliable, the DHCP server can be
-    configured to query the authoritative DNS server directly,
-    bypassing any caching DNS servers.</t>
-
-    <t>It is worth noting that DNS is not the only way to resolve names, and
-    not all DHCP servers support other techniques (e.g., NIS+ or WINS).
-    However, since these protocols have all but vanished from common use,
-    this should not be an issue in new deployments.</t>
-  </section>
 
     <section anchor="shared-subnets" title="Multiple subnets on the same link">
       <t>There are scenarios where there is more than one subnet from the same
       protocol family (i.e. two or more IPv4 subnets or two or more IPv6
-      subnets) configured on the same layer 3 link.  One example is a slow
-      network renumbering where some services are migrated to the new addressing
-      scheme, but some aren't yet.  Second example is a cable network, where
-      cable modems and the devices connected behind them are connected to the
-      same layer 2 link. However, operators want the cable modems and user
-      devices to get addresses from distinct address spaces, so users couldn't
-      easily access their modems management interfaces. Such a configuration is
-      often referred to as 'shared subnets' in Unix environments or 'multinet'
-      in Microsoft terminology.</t>
+      subnets) configured on the same link. Such a configuration is often
+      referred to as 'shared subnets' in Unix environments or 'multinet' in
+      Microsoft terminology.</t>
+
+      <t>The most frequently mentioned use case is a network renumbering where
+      some services are migrated to the new addressing scheme, but some aren't
+      yet.</t>
+
+      <t>Second example is expanding the allocation space. In DHCPv4 and for
+      DHCPv6 Prefix Delegation, there could be cases where multiple subnets are
+      needed, because a single subnet may be too small to accommodate the client
+      population.</t>
+
+      <t>The third use case covers allocating addresses (or delegation prefixes)
+      that are not the same as topological information. For example, the
+      link-address is on prefix X and the addresses to be delegated is on prefix
+      Y. This could be based on differentiating information (i.e., whether
+      device is CPE or CM in DOCSIS) or just because the link-address/giaddr is
+      different from the actual allocation space.</t>
+
+      <t>The fourth use case is a cable network, where cable modems and the
+      devices connected behind them are connected to the same layer 2
+      link. However, operators want the cable modems and user devices to get
+      addresses from distinct address spaces, so users couldn't easily access
+      their modems management interfaces.</t>
+
       <t>To support such a configuration, additional differentiating
       information is required. Many DHCP server implementations offer a feature
       that is typically called client classification. The server segregates
@@ -800,6 +777,7 @@ relation to this document.
       <?rfc include="reference.RFC.6607" ?>
       <?rfc include="reference.RFC.6977" ?>
       <?rfc include="reference.RFC.7159" ?>
+      <?rfc include="reference.RFC.7227" ?>
     </references>
   </back>
 </rfc>
