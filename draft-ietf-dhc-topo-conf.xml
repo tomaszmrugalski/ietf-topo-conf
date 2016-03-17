@@ -7,7 +7,7 @@
 <?rfc compact="yes"?> <?rfc subcompact="no"?>
 <?rfc symrefs="yes"?>
 
-<rfc category="info" docName="draft-ietf-dhc-topo-conf-06" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-dhc-topo-conf-07" ipr="trust200902">
   <front>
     <title abbrev="DHCP Topology Customization">
       Customizing DHCP Configuration on the Basis of Network Topology
@@ -132,8 +132,8 @@ most modern DHCP servers.
         Although some of its aspects are unlikely to be seen in actual
         production networks, they are beneficial for explaining finer
         aspects of the DHCP protocols. Note that some nodes act as routers
-        (which forward all IP traffic) and some are relay agents (i.e. run
-        DHCP specific software that forwards only DHCP traffic).
+        (which forward all IPv6 traffic) and some are relay agents (i.e. run
+        DHCPv6 specific software that forwards only DHCPv6 traffic).
       </t>
 
       <figure anchor="simple-network"
@@ -386,7 +386,7 @@ and are discussed in sections <xref target="v4-behavior"/> and
     interface connected to that specific link. Even
     though link-local addresses cannot be automatically used to
     associate relay agent with a given link, with additional
-    configuration information the server may still able to select
+    configuration information the server may still be able to select
     the proper link. That requires the DHCP server software to be able to
     specify relay agent link-address associated with each link or
     a feature similar to 'shared
@@ -657,7 +657,7 @@ to be routed between regions unnecessarily.
 
       <t>
 In this example, when a request comes in to the DHCP server with a
-link-identifying IP address in the 2001:DB8::/40 prefix, it is
+link-identifying IP address in the 2001:db8::/40 prefix, it is
 identified as being on link A.  The DHCPv6 server then looks on the list
 of links to see what region the client is in.  Link A is identified as
 being in omashu.  The DHCPv6 server then looks up omashu in the set of
@@ -678,7 +678,7 @@ discussion see Section 7 of <xref target="RFC7227" />.</t>
       <t>
 Similarly, if the DHCP server receives a request from a DHCP client
 where the link-identifying IP address is contained by the prefix
-2001:DB8:300::/40, then the DHCP server identifies the client as
+2001:db8:300::/40, then the DHCP server identifies the client as
 being connected to link G.  The DHCP server then identifies link G as
 being in the gaoling region, and returns the sip-servers and
 dns-servers options specific to that region.
