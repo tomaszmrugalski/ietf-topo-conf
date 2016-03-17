@@ -16,34 +16,34 @@
     <author fullname="Ted Lemon" initials="T." surname="Lemon">
       <organization>Nominum, Inc.</organization>
       <address>
-	<postal>
-	  <street>2000 Seaport Blvd</street>
-	  <city>Redwood City</city>
-	  <region>CA</region>
-	  <code>94063</code>
-	  <country>USA</country>
-	</postal>
-	<phone>+1-650-381-6000</phone>
-	<email>Ted.Lemon@nominum.com</email>
+        <postal>
+          <street>2000 Seaport Blvd</street>
+          <city>Redwood City</city>
+          <region>CA</region>
+          <code>94063</code>
+          <country>USA</country>
+        </postal>
+        <phone>+1-650-381-6000</phone>
+        <email>Ted.Lemon@nominum.com</email>
       </address>
     </author>
     
     <author fullname="Tomek Mrugalski" initials="T." surname="Mrugalski">
       <organization abbrev="ISC">Internet Systems Consortium, Inc.</organization>
       <address>
-	<postal>
-	  <street>950 Charter Street</street>
-	  <city>Redwood City</city>
-	  <region>CA</region>
-	  <code>94063</code>
-	  <country>USA</country>
-	</postal>
-	<phone>+1 650 423 1345</phone>
-	<email>tomasz.mrugalski@gmail.com</email>
+        <postal>
+          <street>950 Charter Street</street>
+          <city>Redwood City</city>
+          <region>CA</region>
+          <code>94063</code>
+          <country>USA</country>
+        </postal>
+        <phone>+1 650 423 1345</phone>
+        <email>tomasz.mrugalski@gmail.com</email>
       </address>
     </author>
 
-    <date year="2015"/>
+    <date year="2016"/>
 
     <abstract>
       <t>
@@ -137,8 +137,8 @@ most modern DHCP servers.
       </t>
 
       <figure anchor="simple-network"
-	      title="A simple network with a small hierarchy of links">
-	<artwork><![CDATA[
+              title="A simple network with a small hierarchy of links">
+        <artwork><![CDATA[
            Link A                   Link B
         |===+===========|    |===========+======|
             |                            |
@@ -179,11 +179,11 @@ most modern DHCP servers.
             |                            |
         |===+===========|    |===========+======|
            Link F                   Link G]]>
-	</artwork>
+        </artwork>
       </figure>
 
       <figure anchor="complex-network" title="Complex network">
-	<artwork><![CDATA[
+        <artwork><![CDATA[
            Link A                   Link B            Link H
         |===+==========|    |=========+======|  |======+======|
             |                         |                |
@@ -224,7 +224,7 @@ most modern DHCP servers.
             |                            |
         |===+===========|    |===========+======|
            Link F                   Link G]]>
-	</artwork>
+        </artwork>
       </figure>
 
       <t>
@@ -652,7 +652,7 @@ to be routed between regions unnecessarily.
         }
     }
 }]]>
-	</artwork>
+        </artwork>
       </figure>
 
       <t>
