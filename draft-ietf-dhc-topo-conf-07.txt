@@ -473,7 +473,7 @@ Internet-Draft         DHCP Topology Customization            March 2016
    in Section 5 of [RFC6977]).  It should be noted that the link-
    specific identifier is unique only within the scope of the link-
    identifying IP address.  For example, link-specific identifier of
-   "eth0" assgined to a relay agent using IPv6 address 2001:db8::1 is
+   "eth0" assigned to a relay agent using IPv6 address 2001:db8::1 is
    distinct from a "eth0" identifier used by a different relay agent
    with address 2001:db8::2.
 
