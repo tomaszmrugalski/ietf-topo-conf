@@ -356,10 +356,9 @@ and are discussed in sections <xref target="v4-behavior"/> and
     <t>The second mechanism uses Interface-Id option (see Section
     22.18 of <xref target="RFC3315" />) inserted by the relay agent,
     which identifies the link that the client is connected to.
-    This mechanism may be used for example, when the relay agent
-    does not have a globally unique address or ULA <xref
-    target="RFC4193"/> configured on the client-facing interface) on
-    the client facing interface, thus making the first mechanism
+    This mechanism may be used when the relay agent does not have a
+    globally unique address or ULA <xref target="RFC4193"/> configured
+    on its client-facing interface, thus making the first mechanism
     not feasible. If the interface-id is unique within an
     administrative domain, the interface-id value may be used to
     select the appropriate subnet. As there is no guarantee for the
@@ -418,11 +417,11 @@ and are discussed in sections <xref target="v4-behavior"/> and
     link-identifying IP address, and in some cases it may also have a
     link-specific identifier (e.g. Interface-Id Option or Link Address
     Option defined in Section 5 of <xref target="RFC6977" />).  It
-    should be noted that there the link-specific identifier is unique
+    should be noted that the link-specific identifier is unique
     only within the scope of the link-identifying IP address. For example,
-    link-specific identifier of "eth0" for a relay agent with IPv4 address
-    2001:db8::1 means something different than "eth0" for a relay agent
-    with address 2001:db8::2.</t>
+    link-specific identifier of "eth0" assgined to a relay agent using IPv6 address
+    2001:db8::1 is distinct from a "eth0" identifier used by a
+    different relay agent with address 2001:db8::2.</t>
 
     <t>It is also possible for link-specific identifiers to be nested,
     so that the actual identifier that identifies the link is an
@@ -656,7 +655,7 @@ to be routed between regions unnecessarily.
       </figure>
 
       <t>
-In this example, when a request comes in to the DHCP server with a
+In this example, when a request comes in to the DHCPv6 server with a
 link-identifying IP address in the 2001:db8::/40 prefix, it is
 identified as being on link A.  The DHCPv6 server then looks on the list
 of links to see what region the client is in.  Link A is identified as
@@ -665,7 +664,7 @@ regions, and discovers a list of region-specific options.
       </t>
 
       <t>
-The DHCP server then resolves the domain names listed in the options
+The DHCPv6 server then resolves the domain names listed in the options
 and sends a sip-server option containing the IP addresses that the
 resolver returned for sip.omashu.example.org, and a dns-server option
 containing the IP addresses returned by the resolver for
@@ -676,18 +675,18 @@ the response until reconfiguration or shutdown. For more detailed
 discussion see Section 7 of <xref target="RFC7227" />.</t>
 
       <t>
-Similarly, if the DHCP server receives a request from a DHCP client
+Similarly, if the DHCPv6 server receives a request from a DHCPv6 client
 where the link-identifying IP address is contained by the prefix
-2001:db8:300::/40, then the DHCP server identifies the client as
-being connected to link G.  The DHCP server then identifies link G as
+2001:db8:300::/40, then the DHCPv6 server identifies the client as
+being connected to link G.  The DHCPv6 server then identifies link G as
 being in the gaoling region, and returns the sip-servers and
 dns-servers options specific to that region.
       </t>
 
       <t>As with the previous example, the exact configuration syntax and
-      structure shown above does not precisely match what existing DHCP servers
+      structure shown above does not precisely match what existing DHCPv6 servers
       do, but the behavior illustrated in this example can be accomplished with
-      most existing modern DHCP servers.</t>
+      most existing modern DHCPv6 servers.</t>
     </section>
 
     <section anchor="shared-subnets" title="Multiple subnets on the same link">
