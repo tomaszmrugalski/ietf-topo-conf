@@ -367,7 +367,7 @@ and are discussed in sections <xref target="v4-behavior"/> and
     interface-id to be unique within a single relay agent context), it
     is up to the administrator to check whether the relay agents
     deployed use unique interface-id values. If the interface-id values
-    are not unique, the Interface-id option can not be used to determine
+    are not unique, the Interface-id option cannot be used to determine
     the client's point of attachment.</t>
 
     <t>It should be noted that Relay-forward and Relay-reply
@@ -404,7 +404,7 @@ and are discussed in sections <xref target="v4-behavior"/> and
     <t>DHCPv6 also has support for more finely grained link
     identification, using <xref target="RFC6221">Lightweight DHCPv6
     Relay Agents</xref> (LDRA).  In this case, the link-address field
-    is set to Unspecified_address (::), but the DHCPv6 server also receives an
+    is set to unspecified address (::), but the DHCPv6 server also receives an
     Interface-Id option from the relay agent that can be used to more
     precisely identify the client's location on the network.</t>
 
@@ -708,7 +708,7 @@ dns-servers options specific to that region.
 
       <t>The third use case covers allocating addresses (or delegation prefixes)
       that are not the same as topological information. For example, the
-      link-address is on prefix X and the addresses to be delegated is on prefix
+      link-address is on prefix X and the addresses to be assigned are on prefix
       Y. This could be based on differentiating information (i.e., whether
       device is CPE or CM in DOCSIS) or just because the link-address/giaddr is
       different from the actual allocation space.</t>
