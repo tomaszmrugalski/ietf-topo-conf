@@ -7,7 +7,7 @@
 <?rfc compact="yes"?> <?rfc subcompact="no"?>
 <?rfc symrefs="yes"?>
 
-<rfc category="info" docName="draft-ietf-dhc-topo-conf-07" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-dhc-topo-conf-08" ipr="trust200902">
   <front>
     <title abbrev="DHCP Topology Customization">
       Customizing DHCP Configuration on the Basis of Network Topology
@@ -50,8 +50,8 @@
 DHCP servers have evolved over the years to provide significant
 functionality beyond that which is described in the DHCP base
 specifications.  One aspect of this functionality is support for
-context-specific configuration information.  This memo describes some
-such features and makes recommendations as to how they can be used.
+context-specific configuration information. This memo describes some
+such features and explains their operation.
       </t>
     </abstract>
   </front>
@@ -405,7 +405,10 @@ and are discussed in sections <xref target="v4-behavior"/> and
     Relay Agents</xref> (LDRA).  In this case, the link-address field
     is set to unspecified address (::), but the DHCPv6 server also receives an
     Interface-Id option from the relay agent that can be used to more
-    precisely identify the client's location on the network.</t>
+    precisely identify the client's location on the network. It is
+    possible to mix LDRA and regular relay agents in the same network.
+    See Sections 7.2 and 7.3 in <xref target="RFC6221"/> for detailed
+    examples.</t>
 
     <t>What this means in practice is that the DHCP server in all
     cases has sufficient information to pinpoint, at the very least,
@@ -557,7 +560,7 @@ receive a routers option containing the IP address 192.0.2.129.
       to the DHCP server. That is typical, but not the only possible configuration.
       It is possible to configure relay agent D to forward client messages to
       relay E which in turn will send it to the DHCP server. This configuration
-      is sometimes referred to as cascade relay agents.</t>
+      is sometimes referred to as cascaded relay agents.</t>
 
       <t>Note that the relaying mechanism works differently in DHCPv4 and in
       DHCPv6. In DHCPv4 only the first relay is able to set the giaddr field in
