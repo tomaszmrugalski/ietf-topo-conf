@@ -77,9 +77,9 @@ Table of Contents
    10. Security Considerations . . . . . . . . . . . . . . . . . . .  15
    11. IANA Considerations . . . . . . . . . . . . . . . . . . . . .  16
    12. References  . . . . . . . . . . . . . . . . . . . . . . . . .  16
-     12.1.  Normative References . . . . . . . . . . . . . . . . . .  16
+     12.1.  Normative References . . . . . . . . . . . . . . . . . .  17
      12.2.  Informative References . . . . . . . . . . . . . . . . .  17
-   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  18
+   Authors' Addresses  . . . . . . . . . . . . . . . . . . . . . . .  19
 
 1.  Introduction
 
@@ -869,6 +869,11 @@ Internet-Draft         DHCP Topology Customization             June 2016
    servers.  [I-D.volz-dhc-relay-server-security] attempts to improve
    security of exchanges between DHCP relay agents and servers.
 
+   Another possible attack vector is to set up a rogue DHCP server and
+   provide clients with false information, either as a denial of service
+   or to execute man in the middle type of attack.  This can be
+   mitigated by deplyoing DHCPv6-shield [RFC7610].
+
    Finally, there is an ongoing effort to update DHCPv6 specification,
    that is currently 13 years old.  Sections 23 (Security
    Considerations) and 24 (Privacy Considerations) of
@@ -882,11 +887,6 @@ Internet-Draft         DHCP Topology Customization             June 2016
 
 12.  References
 
-12.1.  Normative References
-
-   [RFC2131]  Droms, R., "Dynamic Host Configuration Protocol",
-              RFC 2131, DOI 10.17487/RFC2131, March 1997,
-              <http://www.rfc-editor.org/info/rfc2131>.
 
 
 
@@ -897,6 +897,12 @@ Lemon & Mrugalski       Expires December 24, 2016              [Page 16]
 
 Internet-Draft         DHCP Topology Customization             June 2016
 
+
+12.1.  Normative References
+
+   [RFC2131]  Droms, R., "Dynamic Host Configuration Protocol",
+              RFC 2131, DOI 10.17487/RFC2131, March 1997,
+              <http://www.rfc-editor.org/info/rfc2131>.
 
    [RFC3315]  Droms, R., Ed., Bound, J., Volz, B., Lemon, T., Perkins,
               C., and M. Carney, "Dynamic Host Configuration Protocol
@@ -938,6 +944,16 @@ Internet-Draft         DHCP Topology Customization             June 2016
               Option for DHCPv4", RFC 3527, DOI 10.17487/RFC3527, April
               2003, <http://www.rfc-editor.org/info/rfc3527>.
 
+
+
+
+
+
+Lemon & Mrugalski       Expires December 24, 2016              [Page 17]
+
+Internet-Draft         DHCP Topology Customization             June 2016
+
+
    [RFC4193]  Hinden, R. and B. Haberman, "Unique Local IPv6 Unicast
               Addresses", RFC 4193, DOI 10.17487/RFC4193, October 2005,
               <http://www.rfc-editor.org/info/rfc4193>.
@@ -946,13 +962,6 @@ Internet-Draft         DHCP Topology Customization             June 2016
               Kavanagh, "Lightweight DHCPv6 Relay Agent", RFC 6221,
               DOI 10.17487/RFC6221, May 2011,
               <http://www.rfc-editor.org/info/rfc6221>.
-
-
-
-Lemon & Mrugalski       Expires December 24, 2016              [Page 17]
-
-Internet-Draft         DHCP Topology Customization             June 2016
-
 
    [RFC6607]  Kinnear, K., Johnson, R., and M. Stapp, "Virtual Subnet
               Selection Options for DHCPv4 and DHCPv6", RFC 6607,
@@ -973,6 +982,11 @@ Internet-Draft         DHCP Topology Customization             June 2016
               BCP 187, RFC 7227, DOI 10.17487/RFC7227, May 2014,
               <http://www.rfc-editor.org/info/rfc7227>.
 
+   [RFC7610]  Gont, F., Liu, W., and G. Van de Velde, "DHCPv6-Shield:
+              Protecting against Rogue DHCPv6 Servers", BCP 199,
+              RFC 7610, DOI 10.17487/RFC7610, August 2015,
+              <http://www.rfc-editor.org/info/rfc7610>.
+
    [RFC7819]  Jiang, S., Krishnan, S., and T. Mrugalski, "Privacy
               Considerations for DHCP", RFC 7819, DOI 10.17487/RFC7819,
               April 2016, <http://www.rfc-editor.org/info/rfc7819>.
@@ -987,6 +1001,15 @@ Internet-Draft         DHCP Topology Customization             June 2016
               DOI 10.17487/RFC7844, May 2016,
               <http://www.rfc-editor.org/info/rfc7844>.
 
+
+
+
+
+Lemon & Mrugalski       Expires December 24, 2016              [Page 18]
+
+Internet-Draft         DHCP Topology Customization             June 2016
+
+
 Authors' Addresses
 
    Ted Lemon
@@ -999,17 +1022,6 @@ Authors' Addresses
    Email: Ted.Lemon@nominum.com
 
 
-
-
-
-
-
-
-Lemon & Mrugalski       Expires December 24, 2016              [Page 18]
-
-Internet-Draft         DHCP Topology Customization             June 2016
-
-
    Tomek Mrugalski
    Internet Systems Consortium, Inc.
    950 Charter Street
@@ -1018,18 +1030,6 @@ Internet-Draft         DHCP Topology Customization             June 2016
 
    Phone: +1 650 423 1345
    Email: tomasz.mrugalski@gmail.com
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -793,6 +793,11 @@ protocols.
       to improve security of exchanges between DHCP relay agents and
       servers.</t>
 
+      <t>Another possible attack vector is to set up a rogue DHCP server and
+      provide clients with false information, either as a denial of service
+      or to execute man in the middle type of attack. This can be mitigated
+      by deplyoing DHCPv6-shield <xref target="RFC7610"/>.</t>
+
       <t>Finally, there is an ongoing effort to update DHCPv6 specification,
       that is currently 13 years old. Sections 23 (Security Considerations) and
       24 (Privacy Considerations) of <xref target="I-D.ietf-dhc-rfc3315bis"/>
@@ -823,6 +828,7 @@ relation to this document.
       <?rfc include="reference.RFC.6977" ?>
       <?rfc include="reference.RFC.7159" ?>
       <?rfc include="reference.RFC.7227" ?>
+      <?rfc include="reference.RFC.7610" ?>
       <?rfc include="reference.RFC.7819" ?>
       <?rfc include="reference.RFC.7824" ?>
       <?rfc include="reference.RFC.7844" ?>
