@@ -823,17 +823,17 @@ Internet-Draft         DHCP Topology Customization             June 2016
    specifications and in related documents that extend these protocols.
 
    The mechanisms described in this document could possibly be exploited
-   by an attacker to misrepresent its point of attachement in the
-   network.  This would cause the server to assign adresses, prefixes
+   by an attacker to misrepresent its point of attachment in the
+   network.  This would cause the server to assign addresses, prefixes
    and other configuration options, which can be considered a leak of
    information.  In particular, this could be used a preliminary stage
-   of attack, when the DHCP server leaks information about available
-   services in networks that attacker does not have access to.
+   of an attack, when the DHCP server leaks information about available
+   services in parts of the network the attacker does not have access
+   to.
 
    There are several ways how such an attack can be prevented.  First,
    it seems to be a common practice to filter out DHCP traffic coming in
    from outside of the network and one that is directed to clients
-   outside of the network.  Second, the DHCP servers can be configured
 
 
 
@@ -842,6 +842,7 @@ Lemon & Mrugalski       Expires December 24, 2016              [Page 15]
 Internet-Draft         DHCP Topology Customization             June 2016
 
 
+   outside of the network.  Second, the DHCP servers can be configured
    to not respond to traffic that is coming from unknown (i.e. those
    subnets the server is not configured to serve) subnets.  Third, some
    relays provide the ability to reject messages that do not fit
@@ -870,7 +871,7 @@ Internet-Draft         DHCP Topology Customization             June 2016
 
    Finally, there is an ongoing effort to update DHCPv6 specification,
    that is currently 13 years old.  Sections 23 (Security
-   Considerations) and 24 (Privacy Conserations) of
+   Considerations) and 24 (Privacy Considerations) of
    [I-D.ietf-dhc-rfc3315bis] contain more recent analysis of the
    security and privacy considerations.
 
@@ -886,7 +887,6 @@ Internet-Draft         DHCP Topology Customization             June 2016
    [RFC2131]  Droms, R., "Dynamic Host Configuration Protocol",
               RFC 2131, DOI 10.17487/RFC2131, March 1997,
               <http://www.rfc-editor.org/info/rfc2131>.
-
 
 
 

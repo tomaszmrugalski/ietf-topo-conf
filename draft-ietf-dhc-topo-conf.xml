@@ -755,8 +755,8 @@ their specifications and in related documents that extend these
 protocols.
       </t>
       <t>The mechanisms described in this document could possibly be exploited
-      by an attacker to misrepresent its point of attachement in the
-      network. This would cause the server to assign adresses, prefixes and
+      by an attacker to misrepresent its point of attachment in the
+      network. This would cause the server to assign addresses, prefixes and
       other configuration options, which can be considered a leak of
       information. In particular, this could be used a preliminary stage of an
       attack, when the DHCP server leaks information about available services in
@@ -795,7 +795,7 @@ protocols.
 
       <t>Finally, there is an ongoing effort to update DHCPv6 specification,
       that is currently 13 years old. Sections 23 (Security Considerations) and
-      24 (Privacy Conserations) of <xref target="I-D.ietf-dhc-rfc3315bis"/>
+      24 (Privacy Considerations) of <xref target="I-D.ietf-dhc-rfc3315bis"/>
       contain more recent analysis of the security and privacy considerations.
       </t>
     </section>
