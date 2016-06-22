@@ -7,7 +7,7 @@
 <?rfc compact="yes"?> <?rfc subcompact="no"?>
 <?rfc symrefs="yes"?>
 
-<rfc category="info" docName="draft-ietf-dhc-topo-conf-08" ipr="trust200902">
+<rfc category="info" docName="draft-ietf-dhc-topo-conf-09" ipr="trust200902">
   <front>
     <title abbrev="DHCP Topology Customization">
       Customizing DHCP Configuration on the Basis of Network Topology
@@ -752,8 +752,51 @@ Dynamic Host Configuration Protocol <xref target="RFC2131" /> and
 Dynamic Host Configuration Protocol Version 6 <xref target="RFC3315"
 />.  The security considerations for these protocols are described in
 their specifications and in related documents that extend these
-protocols.  This document introduces no new functionality, and hence
-no new security considerations.
+protocols.
+      </t>
+      <t>The mechanisms described in this document could possibly be exploited
+      by an attacker to misrepresent its point of attachement in the
+      network. This would cause the server to assign adresses, prefixes and
+      other configuration options, which can be considered a leak of
+      information. In particular, this could be used a preliminary stage of an
+      attack, when the DHCP server leaks information about available services in
+      parts of the network the attacker does not have access to.</t>
+
+      <t>There are several ways how such an attack can be prevented. First, it
+      seems to be a common practice to filter out DHCP traffic coming in from
+      outside of the network and one that is directed to clients outside of the
+      network. Second, the DHCP servers can be configured to not respond to
+      traffic that is coming from unknown (i.e. those subnets the server is not
+      configured to serve) subnets. Third, some relays provide the ability to
+      reject messages that do not fit expected characteristics.  For example
+      CMTS (Cable Modem Termination System) acting as a DHCP relay detects if
+      the MAC address specified in chaddr in incoming DHCP messages matches the
+      MAC address of the cable modem it came from and can alter its behavior
+      accordingly. Also, relay agents and servers that are connected to clients
+      directly can reject traffic that looks as if it has passed a relay (this
+      could indicate the client is attempting to spoof a relay, possibly to
+      inject forged relay options).</t>
+
+      <t>There are a number of general DHCP recommendations that should be
+      considered in all DHCP deployments. While not strictly related to the
+      mechanisms described in this document, they may be useful in certain
+      deployment scenarios. <xref target="RFC7819"/> and <xref
+      target="RFC7824"/> provide an analysis of privacy problems in DHCPv4 and
+      DHCPv6, respectively. If those are of concern, <xref target="RFC7844"/>
+      offers mitigation steps.</t>
+
+      <t>Current DHCPv4 and DHCPv6 standards lack strong cryptographic
+      protection. There is an ongoing effort in DHC working group to address
+      this. <xref target="I-D.ietf-dhc-sedhcpv6" /> attempts to provide
+      mechanism for strong authentication and encryption between DHCPv6 clients
+      and servers. <xref target="I-D.volz-dhc-relay-server-security" /> attempts
+      to improve security of exchanges between DHCP relay agents and
+      servers.</t>
+
+      <t>Finally, there is an ongoing effort to update DHCPv6 specification,
+      that is currently 13 years old. Sections 23 (Security Considerations) and
+      24 (Privacy Conserations) of <xref target="I-D.ietf-dhc-rfc3315bis"/>
+      contain more recent analysis of the security and privacy considerations.
       </t>
     </section>
     <section title="IANA Considerations">
@@ -780,6 +823,12 @@ relation to this document.
       <?rfc include="reference.RFC.6977" ?>
       <?rfc include="reference.RFC.7159" ?>
       <?rfc include="reference.RFC.7227" ?>
+      <?rfc include="reference.RFC.7819" ?>
+      <?rfc include="reference.RFC.7824" ?>
+      <?rfc include="reference.RFC.7844" ?>
+      <?rfc include="reference.I-D.ietf-dhc-rfc3315bis" ?>
+      <?rfc include="reference.I-D.ietf-dhc-sedhcpv6" ?>
+      <?rfc include="reference.I-D.volz-dhc-relay-server-security" ?>
     </references>
   </back>
 </rfc>
