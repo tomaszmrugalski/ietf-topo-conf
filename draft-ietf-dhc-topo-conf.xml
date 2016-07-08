@@ -734,16 +734,13 @@ dns-servers options specific to that region.
     </section>
 
     <section title="Acknowledgments">
-      <t>
-Thanks to Dave Thaler for suggesting that even though "everybody
-knows" how DHCP servers are deployed in the real world, it might be
-worthwhile to have an IETF document that explains what everybody
-knows, because in reality not everybody is an expert in how DHCP
-servers are administered. Thanks to Andre Kostur, Carsten Strotmann,
-Simon Perreault, Jinmei Tatuya, Suresh Krishnan, Qi Sun, Jean-Francois
-Tremblay, Marcin Siodelski and Bernie Volz for their reviews, comments
-and feedback.
-      </t>
+      <t>Thanks to Dave Thaler for suggesting that even though "everybody knows"
+      how DHCP servers are deployed in the real world, it might be worthwhile to
+      have an IETF document that explains what everybody knows, because in
+      reality not everybody is an expert in how DHCP servers are administered.
+      Thanks to Andre Kostur, Carsten Strotmann, Simon Perreault, Jinmei Tatuya,
+      Suresh Krishnan, Qi Sun, Jean-Francois Tremblay, Marcin Siodelski, Bernie
+      Volz and Yaron Sheffer for their reviews, comments and feedback.</t>
     </section>
     <section title="Security Considerations">
       <t>
